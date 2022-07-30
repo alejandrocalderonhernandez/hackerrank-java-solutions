@@ -12,10 +12,8 @@ class MyMath {
         return p.check(num);
     }
 
-    public static PerformOperation isOdd() {
-        return n -> {
-            return !(n % 2 == 0);
-        };
+public static PerformOperation isOdd() {
+        return n -> !(n % 2 == 0);
     }
 
     public static PerformOperation isPrime() {
@@ -23,12 +21,8 @@ class MyMath {
             int max = 1;
             int cont = 0;
             while (max <= n) {
-                if(n % max == 0) {
-                    cont ++;
-                }
-                if(cont >= 3) {
-                    break;
-                }
+                if(n % max == 0) cont ++;
+                if(cont >= 3) break;
                 max ++;
             }
             return cont == 2;
@@ -37,19 +31,13 @@ class MyMath {
 
     public static PerformOperation isPalindrome() {
         return n -> {
-            Integer numInteger = n;
-            String numString = numInteger.toString();
-            boolean next = false;
-            int cont = 0;
-            for (int i = 0; i < numString.length(); i ++) {
-                int reversePos =  numString.length() - i;
-                char reverseChar = numString.charAt(reversePos - 1);
-                char flowChar = numString.charAt(i);
-                if(reverseChar == flowChar){
-                    cont ++;
-                }
+            String numInString = Integer.toString(n);
+            char[] chars = numInString.toCharArray();
+            int charsLength = chars.length;
+            for (int i = 0, r = charsLength; i < charsLength; i ++, r --) {
+                if(chars[i] != chars[r-1]) return false;
             }
-            return cont == numString.length();
+          return true;
         };
     }
 }
